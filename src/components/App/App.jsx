@@ -33,15 +33,11 @@ export default function App() {
   };
 
   const handleFilter = e => {
-    const filterValue = e.currentTarget.value;
-    setFilter(filterValue);
+    setFilter(e.currentTarget.value);
   };
 
   const filterContacts = data => {
-    const filteredContactsList = data.filter(contact =>
-      contact.name.toLowerCase().includes(filter),
-    );
-    return filteredContactsList;
+    return data.filter(contact => contact.name.toLowerCase().includes(filter));
   };
 
   const deleteContact = id => {
@@ -53,7 +49,7 @@ export default function App() {
   return (
     <FormSet>
       <Title>Phonebook</Title>
-      <ContactForm onSubmit={contact => formSubmitHandle(contact)} />
+      <ContactForm onSubmit={formSubmitHandle} />
 
       <Title>Contacts</Title>
       <Filter value={filter} onChange={handleFilter} />
