@@ -7,18 +7,8 @@ export default function ContactForm({ onSubmit }) {
 
   const contact = { name, number };
 
-  const handleInputValue = e => {
-    const { name, value } = e.currentTarget;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        return;
-    }
+  const handleInputValue = ({ currentTarget: { name, value } }) => {
+    name === 'name' ? setName(value) : setNumber(value);
   };
 
   const resetState = () => {

@@ -8,7 +8,7 @@ import { Title, FormSet } from './App.styled';
 
 export default function App() {
   const [contacts, setContacts] = useState(() => {
-    return JSON.parse(localStorage.getItem('contacts')) ?? '';
+    return JSON.parse(localStorage.getItem('contacts')) ?? [];
   });
   const [filter, setFilter] = useState('');
 
@@ -32,19 +32,21 @@ export default function App() {
     setContacts(prevState => [newContact, ...prevState]);
   };
 
-  const handleFilter = e => {
-    setFilter(e.currentTarget.value);
+  const handleFilter = ({ currentTarget: { value } }) => {
+    setFilter(value);
   };
 
-  const filterContacts = data => {
-    return data.filter(contact => contact.name.toLowerCase().includes(filter));
+  const filterContacts = () => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter),
+    );
   };
 
   const deleteContact = id => {
     setContacts(contacts.filter(contact => contact.id !== id));
   };
 
-  const filteredContactsList = filterContacts(contacts);
+  const filteredContactsList = filterContacts();
 
   return (
     <FormSet>
